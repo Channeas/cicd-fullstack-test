@@ -1,15 +1,15 @@
 version: 0.2
 
 phases:
-  install:
+  pre_build:
     commands:
       - cd backend
       - mkdir dist
-      - cd dist
+      - mkdir dist/lambda
   build:
     commands:
-      - zip -r main.zip ../lambda/main
+      - zip -r -j dist/lambda/main.zip lambda/main/
 artifacts:
   files:
     - "**/*"
-  base-directory: backend
+  base-directory: backend/dist
