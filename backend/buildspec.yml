@@ -4,10 +4,13 @@ phases:
   pre_build:
     commands:
       - cd backend
-      - mkdir dist
-      - mkdir dist/lambda
+      - mkdir dist && mkdir dist/lambda
   build:
     commands:
+      # Copy the backend template used for manual approval
+      - cp template.yml dist
+
+      # Zip code for lambdas
       - zip -r -j dist/lambda/main.zip lambda/main/
 artifacts:
   files:
