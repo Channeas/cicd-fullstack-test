@@ -12,4 +12,4 @@ phases:
 artifacts:
   files:
     - "**/*"
-  base-directory: backend/dist
+  base-directory: backend
