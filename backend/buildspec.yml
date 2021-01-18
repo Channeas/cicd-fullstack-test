@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - cd backend
+      - mkdir dist
+      - cd dist
+  build:
+    commands:
+      - zip -r main.zip /backend/lambda/main
+artifacts:
+  files:
+    - "**/*"
+  base-directory: backend/dist
