@@ -6,7 +6,7 @@ Resources:
       Code:
         S3Bucket:
           Ref: BackendS3Bucket
-        S3Key: function.zip
+        S3Key: lambda/main.zip
       Handler: index.handler
       Role: !GetAtt [LambdaRole, Arn]
       Runtime: nodejs12.x
