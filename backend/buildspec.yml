@@ -8,7 +8,7 @@ phases:
       - cd dist
   build:
     commands:
-      - zip -r main.zip /backend/lambda/main
+      - zip -r main.zip /backend/lambda/main/
 artifacts:
   files:
     - "**/*"
