@@ -6,7 +6,11 @@ Resources:
       Code:
         S3Bucket:
           Ref: BackendS3Bucket
-        S3Key: lambda/main.zip
+        S3Key: !Join
+          - ""
+          - - build-
+            - Ref: BuildId
+            - /lambda/main.zip
       Handler: index.handler
       Role: !GetAtt [LambdaRole, Arn]
       Runtime: nodejs12.x
@@ -99,3 +103,6 @@ Parameters:
   BackendS3Bucket:
     Type: String
     Description: The name of the backend S3 bucket
+  BuildId:
+    Type: String
+    Description: The id of the backend build from which code should be used
