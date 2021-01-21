@@ -23,8 +23,9 @@ phases:
 artifacts:
   files:
     - "**/*"
-  base-directory: backend/dist
   secondary-artifacts:
+    BackendBuild:
+      base-directory: backend/dist
     BuildData:
       files: /tmp/buildData.json
       discard-paths: yes
