@@ -1,25 +1,29 @@
 version: 0.2
 
+env:
+  variables:
+    # Create a variable containing the first 8 chars of the commit id
+    COMMIT-ID: ${CODEBUILD_RESOLVED_SOURCE_VERSION:0:8}
+
 phases:
   pre_build:
     commands:
-      # Create a variable containing the first 8 chars of the commit id
-      - COMMIT-ID=$(CODEBUILD_RESOLVED_SOURCE_VERSION:0:8)
-      - echo "Build $(COMMIT-ID)"
-      - printf '{"BuildId":"%s"}' "$(COMMIT-ID)" > /tmp/buildData.json
+      # Store the commit id
+      - echo "Build ${COMMIT-ID}"
+      - printf '{"BuildId":"%s"}' "${COMMIT-ID}" > /tmp/buildData.json
 
       # CD into the backend and create the directory to be exported
       - cd backend
       - mkdir dist
-      - mkdir dist/build-$(COMMIT-ID)
-      - mkdir dist/build-$(COMMIT-ID)/lambda
+      - mkdir dist/build-${COMMIT-ID}
+      - mkdir dist/build-${COMMIT-ID}/lambda
   build:
     commands:
       # Copy the backend template used for manual approval
-      - cp template.yml dist/build-$(COMMIT-ID)
+      - cp template.yml dist/build-${COMMIT-ID}
 
       # Zip code for lambdas
-      - zip -r -j dist/build-$(COMMIT-ID)/lambda/main.zip lambda/main/
+      - zip -r -j dist/build-${COMMIT-ID}/lambda/main.zip lambda/main/
 artifacts:
   files:
     - "**/*"
