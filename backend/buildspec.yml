@@ -21,11 +21,11 @@ phases:
       # Zip code for lambdas
       - zip -r -j dist/build-${COMMIT_ID}/lambda/main.zip lambda/main/
 artifacts:
-  files:
-    - "**/*"
   secondary-artifacts:
     BackendBuild:
       base-directory: backend/dist
+      files:
+        - "**/*"
     BuildData:
       files: /tmp/buildData.json
       discard-paths: yes
